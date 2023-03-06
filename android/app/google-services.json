@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91615343603",
+    "project_id": "mercurium-app",
+    "storage_bucket": "mercurium-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91615343603:android:c40e68c915332c50415886",
+        "android_client_info": {
+          "package_name": "com.example.mercurium_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91615343603-vufs2ch39gn3gpkicrbbetfe7uqfv8t2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgJ8KKnkT3-gshbxPKD4p4VC-R1ZBFIBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91615343603-vufs2ch39gn3gpkicrbbetfe7uqfv8t2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
