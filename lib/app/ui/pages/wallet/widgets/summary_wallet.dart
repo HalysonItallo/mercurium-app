@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mercurium_app/app/ui/shared/components/text_half_view_bold_with_future_value.dart';
 
 class SummaryWallet extends StatelessWidget {
-  final Future<double> future;
+  final Future<double> futureActualBalance;
+  final Future<double> futureBalance;
+
   const SummaryWallet({
     super.key,
-    required this.future,
+    required this.futureActualBalance,
+    required this.futureBalance,
   });
 
   @override
@@ -32,8 +35,12 @@ class SummaryWallet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextHalfViewBoldFutureValue(
-            regularText: "Saldo: ",
-            futureBoldText: future,
+            regularText: "Saldo atual: ",
+            futureBoldText: futureActualBalance,
+          ),
+          TextHalfViewBoldFutureValue(
+            regularText: "Saldo final: ",
+            futureBoldText: futureBalance,
           ),
         ],
       ),

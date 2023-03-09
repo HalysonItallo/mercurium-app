@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_controller.dart';
-import 'package:mercurium_app/app/ui/shared/components/custom_dialog.dart';
+import 'package:mercurium_app/app/ui/shared/components/modal.dart';
 import 'package:mercurium_app/app/ui/shared/components/text_half_view_bold.dart';
 import 'package:mercurium_app/app/ui/shared/utils/formatted.dart';
 
@@ -59,7 +59,7 @@ class ItemFinancialRecord extends StatelessWidget {
                 const SizedBox(height: 2),
                 TextHalfViewBold(
                   regularText:
-                      FormattedDate.toViewDate(data![index].createdAt!),
+                      FormattedDate.toViewDate(data![index].receivedAt),
                   boldText: "Data: ",
                   fontSizeBoldText: 13,
                   fontSizeRegularText: 13,
@@ -83,7 +83,7 @@ class ItemFinancialRecord extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     Get.dialog(
-                      CustomDialog(
+                      Modal(
                         onConfirm: () async {
                           var itHasBeenDeleted =
                               await walletController.deleteFinancialRecord(

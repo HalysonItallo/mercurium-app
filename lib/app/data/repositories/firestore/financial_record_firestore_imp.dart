@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
 import 'package:mercurium_app/app/domain/repositories/financial_record_repository.dart';
+import 'package:mercurium_app/app/ui/shared/utils/select_type.dart';
 
 class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
   final financialRecordRef =
@@ -22,6 +25,7 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
               "id": financialRecord.id,
               "value": financialRecord.data()["value"],
               "createdAt": financialRecord.data()["createdAt"],
+              "receivedAt": financialRecord.data()["receivedAt"],
               "description": financialRecord.data()["description"],
               "type": financialRecord.data()["type"],
               "category": financialRecord.data()["category"],
@@ -58,6 +62,7 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
               "id": financialRecord.id,
               "value": financialRecord.data()["value"],
               "createdAt": financialRecord.data()["createdAt"],
+              "receivedAt": financialRecord.data()["receivedAt"],
               "description": financialRecord.data()["description"],
               "type": financialRecord.data()["type"],
               "category": financialRecord.data()["category"],
@@ -81,6 +86,31 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
   }
 
   @override
+  Future<double> getActualBalance() async {
+    double receivedValue = 0;
+
+    try {
+      var financialRecordFirestoreResult = await financialRecordRef
+          .where('receivedAt', isLessThan: DateTime.now())
+          .get();
+
+      for (var financialRecord in financialRecordFirestoreResult.docs) {
+        var data = financialRecord.data();
+
+        if (data["type"] == "A receber") {
+          receivedValue += data["value"].toDouble();
+        }
+      }
+    } catch (e) {
+      throw Exception(
+        "Sem conexão",
+      );
+    }
+
+    return double.parse((receivedValue).toStringAsFixed(2));
+  }
+
+  @override
   Future<double> getBalance() async {
     double receivedValue = 0;
     double spentValue = 0;
@@ -90,6 +120,7 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
 
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         var data = financialRecord.data();
+
         if (data["type"] == "A pagar") {
           spentValue += data["value"].toDouble();
         }
@@ -151,6 +182,7 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
         "description": financialRecordModel.description,
         "category": financialRecordModel.category,
         "createdAt": financialRecordModel.createdAt,
+        "receivedAt": financialRecordModel.receivedAt,
         "value": financialRecordModel.value,
         "type": financialRecordModel.type,
       });
@@ -172,6 +204,7 @@ class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
       await financialRecordRef.doc(financialRecordModel.id).update({
         "description": financialRecordModel.description,
         "category": financialRecordModel.category,
+        "receivedAt": financialRecordModel.receivedAt,
         "value": financialRecordModel.value,
         "type": financialRecordModel.type,
       });

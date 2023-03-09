@@ -4,10 +4,13 @@ import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_controller.
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/dropdown_list_financial_record_filter.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/list_financial_record.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/summary_wallet.dart';
+import 'package:mercurium_app/app/ui/shared/utils/select_type.dart';
 import 'package:mercurium_app/app/ui/shared/components/text_half_view_bold_with_future_value.dart';
 
 class WalletPage extends GetView<WalletController> {
-  const WalletPage({super.key});
+  WalletPage({super.key});
+
+  final List<String> items = ["Todos", "A pagar", "A receber"];
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,8 @@ class WalletPage extends GetView<WalletController> {
       child: Column(
         children: [
           SummaryWallet(
-            future: controller.getBalance(),
+            futureBalance: controller.getBalance(),
+            futureActualBalance: controller.getActualBalance(),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -30,32 +34,32 @@ class WalletPage extends GetView<WalletController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    controller.selectedType.value == 'Todos'
-                        ? Container()
-                        : controller.selectedType.value == 'A pagar'
-                            ? TextHalfViewBoldFutureValue(
-                                regularText: "A pagar: ",
-                                futureBoldText: controller.getBalanceByType(
-                                    controller.selectedType.value),
-                                icon: const Icon(
-                                  Icons.credit_card_off,
-                                  color: Colors.red,
-                                ),
-                                fontSizeBoldText: 14,
-                              )
-                            : TextHalfViewBoldFutureValue(
-                                regularText: "A receber: ",
-                                futureBoldText: controller.getBalanceByType(
-                                  controller.selectedType.value,
-                                ),
-                                icon: const Icon(
-                                  Icons.payments,
-                                  color: Colors.green,
-                                ),
-                                fontSizeBoldText: 14,
-                              ),
+                    selectType<Widget>(controller.selectedType.value, items, [
+                      Container(),
+                      TextHalfViewBoldFutureValue(
+                        regularText: "A pagar: ",
+                        futureBoldText: controller
+                            .getBalanceByType(controller.selectedType.value),
+                        icon: const Icon(
+                          Icons.credit_card_off,
+                          color: Colors.red,
+                        ),
+                        fontSizeBoldText: 14,
+                      ),
+                      TextHalfViewBoldFutureValue(
+                        regularText: "A receber: ",
+                        futureBoldText: controller.getBalanceByType(
+                          controller.selectedType.value,
+                        ),
+                        icon: const Icon(
+                          Icons.payments,
+                          color: Colors.green,
+                        ),
+                        fontSizeBoldText: 14,
+                      )
+                    ]),
                     DropdownListFinancialRecordFilter(
-                      items: const ["Todos", "A pagar", "A receber"],
+                      items: items,
                       height: 40,
                       selectedValue: controller.selectedType.value,
                       onChanged: (value) {

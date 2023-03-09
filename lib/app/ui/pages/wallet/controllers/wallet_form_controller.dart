@@ -19,6 +19,7 @@ class WalletFormController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final descriptionController = TextEditingController();
   final categoryController = TextEditingController();
+  final receivedAtController = TextEditingController();
   String? initialValue;
 
   dynamic argumentData = Get.arguments;
@@ -27,6 +28,10 @@ class WalletFormController extends GetxController {
   void onInit() {
     descriptionController.text = argumentData?[0]?['data']?.description ?? "";
     categoryController.text = argumentData?[0]?['data']?.category ?? "";
+    receivedAtController.text = argumentData?[0]?['data']?.receivedAt != null
+        ? FormattedDate.toViewDate(argumentData?[0]?['data']?.receivedAt)
+        : "";
+
     initialValue = argumentData?[0]?['data']?.value?.toString() != null
         ? formatted.toViewValue(argumentData[0]['data'].value.toString())
         : null;
@@ -82,6 +87,7 @@ class WalletFormController extends GetxController {
         FinancialRecordModel(
           value: formatted.toDoubleValue(),
           createdAt: DateTime.now(),
+          receivedAt: FormattedDate.toDateTime(receivedAtController.text),
           description: descriptionController.text,
           type: selectedType.value,
           category: categoryController.text,
@@ -97,6 +103,7 @@ class WalletFormController extends GetxController {
         FinancialRecordModel(
           id: argumentData?[0]?['data']?.id,
           value: formatted.toDoubleValue(),
+          receivedAt: FormattedDate.toDateTime(receivedAtController.text),
           description: descriptionController.text,
           type: selectedType.value,
           category: categoryController.text,

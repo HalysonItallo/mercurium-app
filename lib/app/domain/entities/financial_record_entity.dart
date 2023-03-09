@@ -5,4 +5,5 @@ abstract class FinancialRecordEntity {
   late String description;
   late String type;
   late String category;
+  late DateTime receivedAt;
 }

@@ -8,4 +8,5 @@ abstract class FinancialRecordRepository {
   Future<List<FinancialRecordModel>> getAllFinancialRecords();
   Future<double> getBalance();
   Future<double> getBalanceByType(String? type);
+  Future<double> getActualBalance();
 }

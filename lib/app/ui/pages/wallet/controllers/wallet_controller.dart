@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
 import 'package:mercurium_app/app/domain/usecases/delete_financial_record_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/get_actual_balance_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/get_all_financial_records_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/get_balance_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/get_financial_records_by_type_usecase.dart';
@@ -11,6 +12,7 @@ class WalletController extends GetxController {
   final GetFinancialRecordsByTypeUsecase getFinancialRecordsByTypeUsecase;
   final GetBalanceByTypeUsecase getBalanceByTypeUsecase;
   final GetBalanceUsecase getBalanceUsecase;
+  final GetActualBalanceUsecase getActualBalanceUsecase;
   final DeleteFinancialRecordUsecase deleteFinancialRecordUsecase;
 
   WalletController({
@@ -18,6 +20,7 @@ class WalletController extends GetxController {
     required this.getFinancialRecordsByTypeUsecase,
     required this.getBalanceByTypeUsecase,
     required this.getBalanceUsecase,
+    required this.getActualBalanceUsecase,
     required this.deleteFinancialRecordUsecase,
   });
 
@@ -42,6 +45,10 @@ class WalletController extends GetxController {
 
   Future<double> getBalance() {
     return getBalanceUsecase.call();
+  }
+
+  Future<double> getActualBalance() {
+    return getActualBalanceUsecase.call();
   }
 
   Future<bool> deleteFinancialRecord(String id) async {

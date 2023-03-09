@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_form_controller.dart';
+import 'package:mercurium_app/app/ui/pages/wallet/widgets/custom_text_form_field.dart';
+import 'package:mercurium_app/app/ui/pages/wallet/widgets/datetime_form_field.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/dropdown_list_financial_record_filter.dart';
 import 'package:mercurium_app/app/ui/shared/utils/formatted.dart';
 
@@ -27,41 +29,26 @@ class WalletFormPage extends GetView<WalletFormController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    TextFormField(
+                    CustomTextFormField(
                       controller: controller.descriptionController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(gapPadding: 2),
-                        hintText: 'Descrição',
-                        hintStyle: TextStyle(fontSize: 16),
-                      ),
+                      hintText: "Descrição",
                       validator: controller.validationText,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
+                    CustomTextFormField(
                       controller: controller.categoryController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Categoria',
-                        hintStyle: TextStyle(fontSize: 16),
-                      ),
+                      hintText: "Categoria",
                       validator: controller.validationText,
                     ),
-                    const SizedBox(
-                      height: 10,
+                    DatetimeFormField(
+                      controller: controller.receivedAtController,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: TextFormField(
+                          child: CustomTextFormField(
                             initialValue: controller.initialValue,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Valor',
-                              hintStyle: TextStyle(fontSize: 16),
-                            ),
+                            hintText: "Valor",
                             validator: controller.validationNumber,
                             keyboardType: TextInputType.number,
                             inputFormatters: [
@@ -84,13 +71,19 @@ class WalletFormPage extends GetView<WalletFormController> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
                       height: 50,
                       width: MediaQuery.of(context).size.width * 0.40,
                       child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                          ),
+                        ),
                         child: Text(controller.argumentData == null
                             ? 'Cadastrar'
                             : 'Editar'),

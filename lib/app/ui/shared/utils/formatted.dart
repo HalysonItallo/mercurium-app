@@ -3,10 +3,15 @@ import 'package:intl/intl.dart';
 
 class FormattedDate {
   static String toViewDate(DateTime date) {
-    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
     final String formatted = formatter.format(date);
 
-    return formatted.replaceAll('-', ' ');
+    return formatted;
+  }
+
+  static DateTime toDateTime(String date) {
+    DateTime dateTime = DateFormat('dd/MM/yyyy').parse(date);
+    return dateTime;
   }
 }
 

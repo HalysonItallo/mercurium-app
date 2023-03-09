@@ -9,6 +9,7 @@ class FinancialRecordModel implements FinancialRecordEntity {
     required this.description,
     required this.type,
     required this.category,
+    required this.receivedAt,
   });
 
   FinancialRecordModel.fromJson(Map<String, dynamic> json)
@@ -19,6 +20,7 @@ class FinancialRecordModel implements FinancialRecordEntity {
           description: json["description"]! as String,
           type: json["type"]! as String,
           category: json["category"]! as String,
+          receivedAt: (json['receivedAt']! as Timestamp).toDate(),
         );
 
   @override
@@ -33,6 +35,8 @@ class FinancialRecordModel implements FinancialRecordEntity {
   String type;
   @override
   String category;
+  @override
+  DateTime receivedAt;
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -41,5 +45,6 @@ class FinancialRecordModel implements FinancialRecordEntity {
         "description": description,
         "type": type,
         "category": category,
+        "receivedAt": receivedAt.toIso8601String(),
       };
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CustomDialog extends StatelessWidget {
+class Modal extends StatelessWidget {
   final void Function()? onConfirm;
-  const CustomDialog({super.key, required this.onConfirm});
+  const Modal({super.key, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {

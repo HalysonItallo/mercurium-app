@@ -9,7 +9,7 @@ class ControlController extends GetxController {
 
   final List<Widget> widgetOptions = <Widget>[
     const HomePage(),
-    const WalletPage(),
+    WalletPage(),
     const ConfigurationPage(),
   ];
 

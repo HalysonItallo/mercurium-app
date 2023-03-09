@@ -2,6 +2,7 @@ import 'package:currency_text_input_formatter/currency_text_input_formatter.dart
 import 'package:mercurium_app/app/data/repositories/firestore/financial_record_firestore_imp.dart';
 import 'package:mercurium_app/app/domain/usecases/create_financial_record_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/delete_financial_record_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/get_actual_balance_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/get_all_financial_records_usecase.dart';
 import 'package:get/instance_manager.dart';
 import 'package:mercurium_app/app/domain/usecases/get_balance_usecase.dart';
@@ -35,6 +36,9 @@ class MainBinding implements Bindings {
           financialRecordRepository: FinancialRecordeFirebaseImp(),
         ),
         deleteFinancialRecordUsecase: DeleteFinancialRecordUsecase(
+          financialRecordRepository: FinancialRecordeFirebaseImp(),
+        ),
+        getActualBalanceUsecase: GetActualBalanceUsecase(
           financialRecordRepository: FinancialRecordeFirebaseImp(),
         ),
       ),

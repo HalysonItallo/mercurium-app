@@ -68,7 +68,10 @@ class TextHalfViewBoldFutureValue extends StatelessWidget {
                 if (snapshot.hasData) {
                   return Text(
                     formatted.toViewValue("$data"),
-                    style: TextStyle(fontSize: fontSizeBoldText),
+                    style: TextStyle(
+                      fontSize: fontSizeBoldText,
+                    ),
+                    textAlign: TextAlign.start,
                   );
                 } else if (snapshot.hasError) {
                   return SizedBox(
