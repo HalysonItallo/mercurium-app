@@ -10,10 +10,10 @@ import 'package:mercurium_app/app/domain/usecases/get_balance_by_type_usecase.da
 class WalletController extends GetxController {
   final GetAllFinancialRecordsUsecase getAllFinancialRecordsUsecase;
   final GetFinancialRecordsByTypeUsecase getFinancialRecordsByTypeUsecase;
+  final DeleteFinancialRecordUsecase deleteFinancialRecordUsecase;
   final GetBalanceByTypeUsecase getBalanceByTypeUsecase;
   final GetBalanceUsecase getBalanceUsecase;
   final GetActualBalanceUsecase getActualBalanceUsecase;
-  final DeleteFinancialRecordUsecase deleteFinancialRecordUsecase;
 
   WalletController({
     required this.getAllFinancialRecordsUsecase,

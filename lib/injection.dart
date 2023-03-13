@@ -10,6 +10,7 @@ import 'package:mercurium_app/app/domain/usecases/get_financial_records_by_type_
 import 'package:mercurium_app/app/domain/usecases/get_balance_by_type_usecase.dart';
 import 'package:mercurium_app/app/domain/usecases/update_financial_record_usecase.dart';
 import 'package:mercurium_app/app/ui/pages/control/controllers/control_controller.dart';
+import 'package:mercurium_app/app/ui/pages/home/controllers/home_controller.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_controller.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_form_controller.dart';
 import 'package:mercurium_app/app/ui/shared/utils/formatted.dart';
@@ -61,6 +62,20 @@ class MainBinding implements Bindings {
           locale: "pt",
           symbol: "R\$ ",
           decimalDigits: 2,
+        ),
+      ),
+    );
+
+    Get.lazyPut<HomeController>(
+      () => HomeController(
+        getActualBalanceUsecase: GetActualBalanceUsecase(
+          financialRecordRepository: FinancialRecordeFirebaseImp(),
+        ),
+        getBalanceByTypeUsecase: GetBalanceByTypeUsecase(
+          financialRecordRepository: FinancialRecordeFirebaseImp(),
+        ),
+        getBalanceUsecase: GetBalanceUsecase(
+          financialRecordRepository: FinancialRecordeFirebaseImp(),
         ),
       ),
     );
