@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
-import 'package:mercurium_app/app/domain/usecases/delete_financial_record_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_actual_balance_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_all_financial_records_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_balance_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_financial_records_by_type_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_balance_by_type_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/delete_financial_record_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_actual_balance_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_all_financial_records_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_balance_by_type_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_balance_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_financial_records_by_type_usecase.dart';
+import 'package:mercurium_app/app/ui/shared/components/modal.dart';
 
 class WalletController extends GetxController {
   final GetAllFinancialRecordsUsecase getAllFinancialRecordsUsecase;

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mercurium_app/injection.dart';
@@ -9,9 +10,11 @@ void main() async {
   MainBinding mainBinding = MainBinding();
   await mainBinding.dependencies();
 
-  await Firebase.initializeApp(
+  var app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  FirebaseAuth.instanceFor(app: app);
 
   runApp(const App());
 }

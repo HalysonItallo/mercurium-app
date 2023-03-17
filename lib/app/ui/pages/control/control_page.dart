@@ -7,6 +7,8 @@ class ControlPage extends GetView<ControlController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.selectedIndex.value = 0;
+
     return Scaffold(
       body: Obx(
         () => Center(

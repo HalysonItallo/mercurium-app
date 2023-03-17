@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
-import 'package:mercurium_app/app/domain/usecases/create_financial_record_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/update_financial_record_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/create_financial_record_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/update_financial_record_usecase.dart';
 import 'package:mercurium_app/app/ui/shared/utils/formatted.dart';
 
 class WalletFormController extends GetxController {

@@ -105,9 +105,9 @@ class ItemFinancialRecord extends StatelessWidget {
                                 ),
                                 onPressed: () => {
                                   Get.back(result: true),
-                                  Get.offAllNamed("/control-page", arguments: [
-                                    {"index", 1}
-                                  ]),
+                                  Get.offAllNamed(
+                                    "/control",
+                                  ),
                                 },
                                 child: const Text(
                                   'Ok',

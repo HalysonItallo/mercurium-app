@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
 import 'package:mercurium_app/app/domain/repositories/financial_record_repository.dart';
 
-class FinancialRecordeFirebaseImp implements FinancialRecordRepository {
+class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
   final financialRecordRef =
       FirebaseFirestore.instance.collection('financial_record');
 

@@ -1,12 +1,31 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mercurium_app/app/ui/pages/configuration/controllers/configuration_controller.dart';
 
-class ConfigurationPage extends StatelessWidget {
+class ConfigurationPage extends GetView<ConfigurationController> {
   const ConfigurationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Olá configuração"),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Sair"),
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.red,
+              ),
+              onPressed: () async {
+                await controller.signOut();
+              },
+            )
+          ],
+        )
+      ],
     );
   }
 }

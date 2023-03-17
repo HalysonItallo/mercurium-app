@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextHalfViewBold extends StatelessWidget {
   final String regularText;
-  final String boldText;
+  final String? boldText;
   final double? fontSizeRegularText;
   final double? fontSizeBoldText;
   final Icon? icon;
@@ -10,7 +10,7 @@ class TextHalfViewBold extends StatelessWidget {
   const TextHalfViewBold({
     super.key,
     required this.regularText,
-    required this.boldText,
+    this.boldText,
     this.fontSizeBoldText = 16,
     this.fontSizeRegularText = 16,
     this.icon,
@@ -22,13 +22,15 @@ class TextHalfViewBold extends StatelessWidget {
       alignment: WrapAlignment.center,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Text(
-          boldText,
-          style: TextStyle(
-            fontSize: fontSizeBoldText,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        boldText != null
+            ? Text(
+                boldText!,
+                style: TextStyle(
+                  fontSize: fontSizeBoldText,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Container(),
         Text(
           regularText,
           style: TextStyle(fontSize: fontSizeRegularText),

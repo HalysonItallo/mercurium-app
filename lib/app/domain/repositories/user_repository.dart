@@ -1,6 +1,8 @@
-import 'package:mercurium_app/app/domain/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class UserRepository {
-  Future<bool> getUserByEmailAndPassword(String email, String password);
-  Future<bool> createUser(UserEntity user);
+  Future<bool> signUp(String email, String password);
+  Future<bool> signOut();
+  Stream<User?> checkUserIsLogin();
+  Future<bool> login(String email, String password);
 }

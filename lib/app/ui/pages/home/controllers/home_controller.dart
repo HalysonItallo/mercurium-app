@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:mercurium_app/app/domain/usecases/get_actual_balance_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_balance_by_type_usecase.dart';
-import 'package:mercurium_app/app/domain/usecases/get_balance_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_actual_balance_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_balance_by_type_usecase.dart';
+import 'package:mercurium_app/app/domain/usecases/financial_record/get_balance_usecase.dart';
 
 class HomeController extends GetxController {
   final GetBalanceByTypeUsecase getBalanceByTypeUsecase;

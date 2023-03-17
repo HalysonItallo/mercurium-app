@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/controllers/wallet_form_controller.dart';
-import 'package:mercurium_app/app/ui/pages/wallet/widgets/custom_text_form_field.dart';
+import 'package:mercurium_app/app/ui/shared/components/custom_text_form_field.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/datetime_form_field.dart';
 import 'package:mercurium_app/app/ui/pages/wallet/widgets/dropdown_list_financial_record_filter.dart';
 import 'package:mercurium_app/app/ui/shared/utils/formatted.dart';
@@ -111,9 +111,7 @@ class WalletFormPage extends GetView<WalletFormController> {
                                   ),
                                 ),
                                 onPressed: () => {
-                                  Get.offAllNamed("/control-page", arguments: [
-                                    {"index", 1}
-                                  ]),
+                                  Get.offAllNamed("/control"),
                                 },
                                 child: const Text(
                                   'Ok',
