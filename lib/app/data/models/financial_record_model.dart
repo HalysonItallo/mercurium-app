@@ -4,6 +4,7 @@ import 'package:mercurium_app/app/domain/entities/financial_record_entity.dart';
 class FinancialRecordModel implements FinancialRecordEntity {
   FinancialRecordModel({
     this.id,
+    this.userId,
     required this.value,
     this.createdAt,
     required this.description,
@@ -15,6 +16,7 @@ class FinancialRecordModel implements FinancialRecordEntity {
   FinancialRecordModel.fromJson(Map<String, dynamic> json)
       : this(
           id: json["id"]! as String,
+          userId: json["userId"]! as String,
           value: json["value"].toDouble(),
           createdAt: (json['createdAt']! as Timestamp).toDate(),
           description: json["description"]! as String,
@@ -25,6 +27,8 @@ class FinancialRecordModel implements FinancialRecordEntity {
 
   @override
   String? id;
+  @override
+  String? userId;
   @override
   double value;
   @override

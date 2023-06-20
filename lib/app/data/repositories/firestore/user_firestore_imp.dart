@@ -61,6 +61,7 @@ class UserFirestoreImp implements UserRepository {
         throw Exception('Senha incorreta');
       }
     }
+
     return itHasBeenLogged;
   }
 }

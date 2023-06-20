@@ -46,6 +46,7 @@ class FutureBarGraph extends StatelessWidget {
               return Container(
                 padding: padding,
                 height: height,
+
                 child: Chart(
                   data: [
                     {'category': "Saldo Atual", "balance": data?[0]},
@@ -60,12 +61,72 @@ class FutureBarGraph extends StatelessWidget {
                       accessor: (Map map) => map['balance'] as num,
                     ),
                   },
-                  elements: [IntervalElement()],
                   axes: [
                     Defaults.horizontalAxis,
                     Defaults.verticalAxis,
                   ],
+                  marks: [
+                    IntervalMark(
+                      label: LabelEncode(
+                          encoder: (tuple) =>
+                              Label(tuple['category'].toString())),
+                      elevation: ElevationEncode(value: 0, updaters: {
+                        'tap': {true: (_) => 5}
+                      }),
+                      color:
+                          ColorEncode(value: Defaults.primaryColor, updaters: {
+                        'tap': {false: (color) => color.withAlpha(100)}
+                      }),
+                    )
+                  ],
+                  selections: {'tap': PointSelection(dim: Dim.x)},
+                  tooltip: TooltipGuide(),
+                  crosshair: CrosshairGuide(),
                 ),
+                // Chart(
+                //   data: [
+                //     {'category': "Saldo Atual", "balance": data?[0]},
+                //     {'category': "A receber", "balance": data?[1]},
+                //     {'category': "A pagar", "balance": data?[2]},
+                //   ],
+                //   variables: {
+                //     'time': Variable(
+                //       accessor: (TimeSeriesSales datum) => datum.time,
+                //       scale: TimeScale(
+                //         formatter: (time) => _monthDayFormat.format(time),
+                //       ),
+                //     ),
+                //   },
+                //   marks: [
+                //     LineMark(
+                //       shape: ShapeEncode(value: BasicLineShape(dash: [5, 2])),
+                //       selected: {
+                //         'touchMove': {1}
+                //       },
+                //     )
+                //   ],
+                //   coord: RectCoord(color: const Color(0xffdddddd)),
+                //   axes: [
+                //     Defaults.horizontalAxis,
+                //     Defaults.verticalAxis,
+                //   ],
+                //   selections: {
+                //     'touchMove': PointSelection(
+                //       on: {
+                //         GestureType.scaleUpdate,
+                //         GestureType.tapDown,
+                //         GestureType.longPressMoveUpdate
+                //       },
+                //       dim: Dim.x,
+                //     )
+                //   },
+                //   tooltip: TooltipGuide(
+                //     followPointer: [false, true],
+                //     align: Alignment.topLeft,
+                //     offset: const Offset(-20, -20),
+                //   ),
+                //   crosshair: CrosshairGuide(followPointer: [false, true]),
+                // ),
               );
             } else if (snapshot.hasError) {
               return SizedBox(

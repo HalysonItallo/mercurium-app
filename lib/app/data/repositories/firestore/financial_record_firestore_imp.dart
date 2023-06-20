@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mercurium_app/app/data/models/financial_record_model.dart';
 import 'package:mercurium_app/app/domain/repositories/financial_record_repository.dart';
 
@@ -6,20 +7,25 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
   final financialRecordRef =
       FirebaseFirestore.instance.collection('financial_record');
 
+  final userRef = FirebaseAuth.instance;
+
   @override
   Future<List<FinancialRecordModel>> getFinancialRecordsByType(
       String? type) async {
     List<FinancialRecordModel> financialRecordSerialized = [];
 
     try {
-      var financialRecordFirestoreResult =
-          await financialRecordRef.where("type", isEqualTo: type).get();
+      var financialRecordFirestoreResult = await financialRecordRef
+          .where("userId", isEqualTo: userRef.currentUser!.uid)
+          .where("type", isEqualTo: type)
+          .get();
 
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         financialRecordSerialized.add(
           FinancialRecordModel.fromJson(
             {
               "id": financialRecord.id,
+              "userId": financialRecord.data()["userId"],
               "value": financialRecord.data()["value"],
               "createdAt": financialRecord.data()["createdAt"],
               "receivedAt": financialRecord.data()["receivedAt"],
@@ -50,13 +56,16 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
     List<FinancialRecordModel> financialRecordSerialized = [];
 
     try {
-      var financialRecordFirestoreResult = await financialRecordRef.get();
+      var financialRecordFirestoreResult = await financialRecordRef
+          .where("userId", isEqualTo: userRef.currentUser!.uid)
+          .get();
 
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         financialRecordSerialized.add(
           FinancialRecordModel.fromJson(
             {
               "id": financialRecord.id,
+              "userId": financialRecord.data()["userId"],
               "value": financialRecord.data()["value"],
               "createdAt": financialRecord.data()["createdAt"],
               "receivedAt": financialRecord.data()["receivedAt"],
@@ -94,7 +103,8 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         var data = financialRecord.data();
 
-        if (data["type"] == "A receber") {
+        if (data["type"] == "A receber" &&
+            data["userId"] == userRef.currentUser!.uid) {
           receivedValue += data["value"].toDouble();
         }
       }
@@ -113,7 +123,9 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
     double spentValue = 0;
 
     try {
-      var financialRecordFirestoreResult = await financialRecordRef.get();
+      var financialRecordFirestoreResult = await financialRecordRef
+          .where("userId", isEqualTo: userRef.currentUser!.uid)
+          .get();
 
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         var data = financialRecord.data();
@@ -139,8 +151,10 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
     double totalValue = 0;
 
     try {
-      var financialRecordFirestoreResult =
-          await financialRecordRef.where("type", isEqualTo: type).get();
+      var financialRecordFirestoreResult = await financialRecordRef
+          .where("type", isEqualTo: type)
+          .where("userId", isEqualTo: userRef.currentUser!.uid)
+          .get();
 
       for (var financialRecord in financialRecordFirestoreResult.docs) {
         totalValue += financialRecord.data()["value"].toDouble();
@@ -176,6 +190,7 @@ class FinancialRecordeFirestoreImp implements FinancialRecordRepository {
 
     try {
       await financialRecordRef.add({
+        "userId": userRef.currentUser!.uid,
         "description": financialRecordModel.description,
         "category": financialRecordModel.category,
         "createdAt": financialRecordModel.createdAt,
